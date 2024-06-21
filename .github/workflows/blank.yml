@@ -1,0 +1,21 @@
+name: Runner IP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Get GitHub Actions IP
+      id: github-actions-ip
+      run: echo "::set-output name=ip::$(curl -s ifconfig.me)"
+
+    - name: Print GitHub Actions IP
+      run: echo "The GitHub Actions runner's IP is ${{ steps.github-actions-ip.outputs.ip }}"
